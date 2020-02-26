@@ -5,7 +5,7 @@ var currentScoreDisplay = document.getElementById("current-score");
 var timerDisplay = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
 
-var timerInt = 5;
+var timerInt;
 var timer;
 var questionTimeout;
 var highScore = localStorage.getItem("high-score");
@@ -35,9 +35,12 @@ function displayQuestion() {
         answerDiv.innerText = set.answers[i];
         answersDisplay.appendChild(answerDiv);
     }
+
+    answersDisplay.addEventListener("click", selectedAnswer);
 };
 
 function selectedAnswer(event) {
+    answersDisplay.removeEventListener("click", selectedAnswer);
     if (event.target.dataset.answer === correctAnswer) {
         event.target.setAttribute("style", "color: green");
         currentScore = currentScore + 5;
@@ -60,9 +63,13 @@ currentScoreDisplay.innerHTML = currentScore;
 
 startButton.addEventListener("click", function() {
     timerInt = 5;
+    currentScore = 0;
+    currentScoreDisplay.innerHTML = currentScore;
+    highScoreDisplay.innerHTML = highScore;
     displayQuestion();
     timerDisplay.innerHTML = timerInt;
     startButton.style.display = "none";
+    answersDisplay.addEventListener("click", selectedAnswer);
     var timer = setInterval(function() {
         timerInt--;
         timerDisplay.innerHTML = timerInt;
@@ -73,10 +80,12 @@ startButton.addEventListener("click", function() {
             clearInterval(timer);
             clearTimeout(questionTimeout);
             if (currentScore > highScore) {
+                highScore = currentScore;
+                highScoreDisplay.innerHTML = highScore;
                 localStorage.setItem("high-score", currentScore);
             }
         }
-    }, 1000)
+    }, 1000);
 });
 
-answersDisplay.addEventListener("click", selectedAnswer);
+// answersDisplay.addEventListener("click", selectedAnswer);
