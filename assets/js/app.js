@@ -7,7 +7,7 @@ var startButton = document.getElementById("start-button");
 
 var timerInt = 5;
 var timer;
-var highScore;
+var highScore = localStorage.getItem("high-score");
 var currentScore = 0;
 var correctAnswer = "";
 
@@ -51,11 +51,9 @@ function selectedAnswer(event) {
     }
 };
 
-if (localStorage.getItem("high-score")) {
-    highScore = localStorage.getItem("high-score");
-} else {
+if (highScore === null ) {
     highScore = 0;
-}
+};
 
 highScoreDisplay.innerHTML = highScore;
 currentScoreDisplay.innerHTML = currentScore;
@@ -69,6 +67,9 @@ startButton.addEventListener("click", function() {
         if (timerInt === 0) {
             questionDisplay.innerHTML = "<h1>GAME OVER!</h1>";
             clearInterval(timer);
+            if (currentScore > highScore) {
+                localStorage.setItem("high-score", currentScore);
+            }
         }
     }, 1000)
 });
