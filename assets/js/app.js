@@ -22,6 +22,7 @@ function displayQuestion() {
     answersDisplay.innerHTML = "";
 
     var set = randomQuestion(data);
+    console.log(set)
     correctAnswer = set.correctAnswer;
 
     var questionDiv = document.createElement("h2");
@@ -45,12 +46,12 @@ function selectedAnswer(event) {
         event.target.setAttribute("style", "color: green");
         currentScore = currentScore + 5;
         currentScoreDisplay.innerHTML = currentScore;
-        questionTimeout = setTimeout(displayQuestion, 1000);
+        questionTimeout = setTimeout(displayQuestion, 3000);
     } else {
         event.target.setAttribute("style", "color: red");
         currentScore = currentScore - 3;
         currentScoreDisplay.innerHTML = currentScore;
-        questionTimeout = setTimeout(displayQuestion, 1000);
+        questionTimeout = setTimeout(displayQuestion, 3000);
     }
 };
 
@@ -62,7 +63,7 @@ highScoreDisplay.innerHTML = highScore;
 currentScoreDisplay.innerHTML = currentScore;
 
 startButton.addEventListener("click", function() {
-    timerInt = 5;
+    timerInt = 60;
     currentScore = 0;
     currentScoreDisplay.innerHTML = currentScore;
     highScoreDisplay.innerHTML = highScore;
@@ -87,5 +88,3 @@ startButton.addEventListener("click", function() {
         }
     }, 1000);
 });
-
-// answersDisplay.addEventListener("click", selectedAnswer);
