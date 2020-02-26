@@ -7,6 +7,7 @@ var startButton = document.getElementById("start-button");
 
 var timerInt = 5;
 var timer;
+var questionTimeout;
 var highScore = localStorage.getItem("high-score");
 var currentScore = 0;
 var correctAnswer = "";
@@ -17,7 +18,6 @@ function randomQuestion(arr) {
 
 function displayQuestion() {
     clearTimeout();
-
     questionDisplay.innerHTML = "";
     answersDisplay.innerHTML = "";
 
@@ -42,12 +42,12 @@ function selectedAnswer(event) {
         event.target.setAttribute("style", "color: green");
         currentScore = currentScore + 5;
         currentScoreDisplay.innerHTML = currentScore;
-        setTimeout(displayQuestion, 1000);
+        questionTimeout = setTimeout(displayQuestion, 1000);
     } else {
         event.target.setAttribute("style", "color: red");
         currentScore = currentScore - 3;
         currentScoreDisplay.innerHTML = currentScore;
-        setTimeout(displayQuestion, 1000);
+        questionTimeout = setTimeout(displayQuestion, 1000);
     }
 };
 
@@ -59,14 +59,19 @@ highScoreDisplay.innerHTML = highScore;
 currentScoreDisplay.innerHTML = currentScore;
 
 startButton.addEventListener("click", function() {
+    timerInt = 5;
+    displayQuestion();
     timerDisplay.innerHTML = timerInt;
     startButton.style.display = "none";
-    timer = setInterval(function() {
+    var timer = setInterval(function() {
         timerInt--;
         timerDisplay.innerHTML = timerInt;
         if (timerInt === 0) {
-            questionDisplay.innerHTML = "<h1>GAME OVER!</h1>";
+            questionDisplay.innerHTML = "<h2>GAME OVER!</h2>";
+            answersDisplay.innerHTML = "";
+            startButton.style.display = "block";
             clearInterval(timer);
+            clearTimeout(questionTimeout);
             if (currentScore > highScore) {
                 localStorage.setItem("high-score", currentScore);
             }
@@ -75,5 +80,3 @@ startButton.addEventListener("click", function() {
 });
 
 answersDisplay.addEventListener("click", selectedAnswer);
-
-displayQuestion();
