@@ -22,7 +22,6 @@ function displayQuestion() {
     answersDisplay.innerHTML = "";
 
     var set = randomQuestion(data);
-    console.log(set)
     correctAnswer = set.correctAnswer;
 
     var questionDiv = document.createElement("h2");
@@ -34,21 +33,25 @@ function displayQuestion() {
         answerDiv.setAttribute("data-answer", set.answers[i]);
         answerDiv.setAttribute("class", "answer");
         answerDiv.innerText = set.answers[i];
+        answerDiv.addEventListener("click", selectedAnswer);
         answersDisplay.appendChild(answerDiv);
     }
-
-    answersDisplay.addEventListener("click", selectedAnswer);
 };
 
 function selectedAnswer(event) {
-    answersDisplay.removeEventListener("click", selectedAnswer);
+    var answers = document.getElementsByClassName("answer");
+
+    for (var j = 0; j < answers.length; j++) {
+        answers[j].removeEventListener("click", selectedAnswer);
+    }
+
     if (event.target.dataset.answer === correctAnswer) {
-        event.target.setAttribute("style", "color: green");
+        event.target.classList.add("correct");
         currentScore = currentScore + 5;
         currentScoreDisplay.innerHTML = currentScore;
         questionTimeout = setTimeout(displayQuestion, 3000);
     } else {
-        event.target.setAttribute("style", "color: red");
+        event.target.classList.add("incorrect");
         currentScore = currentScore - 3;
         currentScoreDisplay.innerHTML = currentScore;
         questionTimeout = setTimeout(displayQuestion, 3000);
@@ -70,7 +73,6 @@ startButton.addEventListener("click", function() {
     displayQuestion();
     timerDisplay.innerHTML = timerInt;
     startButton.style.display = "none";
-    answersDisplay.addEventListener("click", selectedAnswer);
     var timer = setInterval(function() {
         timerInt--;
         timerDisplay.innerHTML = timerInt;

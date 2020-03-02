@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Quiz</title>
@@ -18,16 +19,18 @@
         <div>Current Score: <span id="current-score"></span></div>
 
         <div>Timer: <span id="timer"></span></div>
-
-        <button id="start-button">Start Quiz</button>
     </section>
 
     <main>
-        <div id="question"></div>
-        
-        <div id="answers"></div>
+        <div id="start-button">Start Quiz</div>
 
-        <div id="correct-answer"></div>
+        <div id="display">
+            <div id="question"></div>
+            
+            <div id="answers"></div>
+
+            <div id="correct-answer"></div>
+        </div>
     </main>
     
     <script src="assets/js/questions.js"></script>
