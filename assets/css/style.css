@@ -50,6 +50,10 @@ main {
     font-size: 2em;
 }
 
+#start-button:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
 #display {
     width: 90%;
 }
@@ -70,6 +74,10 @@ main {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
+.answer:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
 .correct {
     background-color: #03b888cc;
     font-weight: 700;
@@ -85,6 +93,7 @@ main {
 #timer-display {
     display: none;
     margin: 1em;
+    font-size: 1.25rem
 }
 
 footer {
