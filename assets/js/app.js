@@ -1,8 +1,12 @@
+var main = document.getElementById("main");
+var gameOver = document.getElementById("game-over");
+var display = document.getElementById("display");
 var questionDisplay = document.getElementById("question");
 var answersDisplay = document.getElementById("answers");
 var highScoreDisplay = document.getElementById("high-score");
 var currentScoreDisplay = document.getElementById("current-score");
-var timerDisplay = document.getElementById("timer");
+var timerSpan = document.getElementById("timer");
+var timerDisplay = document.getElementById("timer-display");
 var startButton = document.getElementById("start-button");
 
 var timerInt;
@@ -71,15 +75,19 @@ startButton.addEventListener("click", function() {
     currentScoreDisplay.innerHTML = currentScore;
     highScoreDisplay.innerHTML = highScore;
     displayQuestion();
-    timerDisplay.innerHTML = timerInt;
+    timerDisplay.style.display = "block";
+    timerSpan.innerHTML = timerInt;
     startButton.style.display = "none";
+    gameOver.style.display = "none";
     var timer = setInterval(function() {
         timerInt--;
-        timerDisplay.innerHTML = timerInt;
+        timerSpan.innerHTML = timerInt;
         if (timerInt === 0) {
-            questionDisplay.innerHTML = "<h2>GAME OVER!</h2>";
             answersDisplay.innerHTML = "";
+            questionDisplay.innerHTML = "";
             startButton.style.display = "block";
+            gameOver.style.display = "block";
+            timerDisplay.style.display = "none";
             clearInterval(timer);
             clearTimeout(questionTimeout);
             if (currentScore > highScore) {

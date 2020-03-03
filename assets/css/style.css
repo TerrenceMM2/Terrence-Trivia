@@ -1,11 +1,22 @@
+html {
+    background: linear-gradient(-3deg, #333 12%, #67a8ff 12%, #88fffc 82%, #333 82%);
+
+}
+
 body {
     font-family: 'Libre Franklin', sans-serif;
-    background: #CCBAED;
-    background: -webkit-linear-gradient(top left, #CCBAED, #6FFFD9);
-    background: -moz-linear-gradient(top left, #CCBAED, #6FFFD9);
-    background: linear-gradient(to bottom right, #CCBAED, #6FFFD9);
     height: 100vh;
     text-align: center;
+    cursor: default;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+
+header, section {
+    color: white;
 }
 
 h1 {
@@ -13,43 +24,89 @@ h1 {
     padding-top: 1em;
 }
 
+section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 main {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    width: 90%;
+    margin: auto;
+}
+
+#game-over {
+    display: none;
 }
 
 #start-button {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
-    padding: 1em 8em;
+    padding: 1rem 6rem;
+    margin-top: 10rem;
+    font-size: 2em;
+}
+
+#display {
+    width: 90%;
 }
 
 #answers {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     justify-content: center;
     align-content: space-evenly;
-    height: 50vh;
 }
 
 .answer {
     margin: 1em;
     padding: 1em;
-    width: 70%;
+    width: 75%;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.5);
 }
 
 .correct {
-    background-color: #03B888;
+    background-color: #03b888cc;
     font-weight: 700;
     color: white;
 }
 
 .incorrect {
-    background-color: #BA4938;
+    background-color: #BA4938cc;
     font-weight: 700;
     color: white;
+}
+
+#timer-display {
+    display: none;
+    margin: 1em;
+}
+
+footer {
+    background-image: linear-gradient(110deg, black);
+}
+
+footer, .push {
+    height: 50px;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: #03FCBA;
+}
+
+@media only screen and (min-width: 768px) {
+    .answer {
+        width: 40%;
+    }
+
+    main {
+        margin-top: 11em;
+    }
 }

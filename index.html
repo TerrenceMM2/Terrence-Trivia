@@ -9,19 +9,21 @@
     <title>Quiz</title>
 </head>
 <body>
+    <div class="wrapper">
+
     <header>
-        <h1>The Quiz of Terrence</h1>
+        <h1>Terrence Trivia</h1>
     </header>
 
     <section>
         <div>High Score: <span id="high-score"></span></div>
         
         <div>Current Score: <span id="current-score"></span></div>
-
-        <div>Timer: <span id="timer"></span></div>
     </section>
 
-    <main>
+    <main id="main">
+        <h2 id="game-over">GAME OVER</h2>
+
         <div id="start-button">Start Quiz</div>
 
         <div id="display">
@@ -32,6 +34,15 @@
             <div id="correct-answer"></div>
         </div>
     </main>
+
+    <div id="timer-display">Timer: <span id="timer"></span></div>
+
+    <div class="push"></div>
+    </div>
+
+    <footer>
+        Built by <a href="https://www.linkedin.com/in/terrencemahnken/" target="_blank">Terrence Mahnken</a> | &copy; 2020
+    </footer>
     
     <script src="assets/js/questions.js"></script>
     <script src="assets/js/app.js"></script>
