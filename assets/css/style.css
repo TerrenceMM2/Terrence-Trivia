@@ -78,13 +78,13 @@ main {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
-.correct {
+#correct {
     background-color: #03b888cc;
     font-weight: 700;
     color: white;
 }
 
-.incorrect {
+#incorrect {
     background-color: #BA4938cc;
     font-weight: 700;
     color: white;
