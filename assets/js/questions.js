@@ -1,16 +1,16 @@
 const data = [
     {
-        question: "What is my name?",
+        question: "What is my middle name?",
         answers: [
-            "Terrence",
-            "Alec",
-            "Pete",
-            "Alfie"
+            "Mitchell",
+            "Mason",
+            "Maxwell",
+            "Michael"
         ],
-        correctAnswer: "Terrence"
+        correctAnswer: "Michael"
     },
     {
-        question: "Where do I live?",
+        question: "Where am I from?",
         answers: [
             "Florida",
             "Tennessee",
@@ -20,7 +20,7 @@ const data = [
         correctAnswer: "Tennessee"
     },
     {
-        question: "What is my favorite food?",
+        question: "What is my favorite cuisine?",
         answers: [
             "American",
             "Italian",

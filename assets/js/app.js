@@ -32,11 +32,13 @@ function displayQuestion() {
     questionDiv.innerText = set.question;
     questionDisplay.appendChild(questionDiv);
 
-    for (var i = 0; i < set.answers.length; i++) {
+    var answerArr = set.answers.sort(() => Math.random() - 0.5);
+
+    for (var i = 0; i < answerArr.length; i++) {
         var answerDiv = document.createElement("div");
         answerDiv.setAttribute("data-answer", set.answers[i]);
         answerDiv.setAttribute("class", "answer");
-        answerDiv.innerText = set.answers[i];
+        answerDiv.innerText = answerArr[i];
         answerDiv.addEventListener("click", selectedAnswer);
         answersDisplay.appendChild(answerDiv);
     }
