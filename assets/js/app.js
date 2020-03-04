@@ -13,6 +13,7 @@ var usernameInput = document.getElementById("username");
 var rankingList = document.getElementById("ranking");
 var topNamesList = document.getElementById("top-names");
 var topScoresList = document.getElementById("top-scores");
+var form = document.getElementById("form");
 
 var timerInt;
 var timer;
@@ -114,20 +115,25 @@ function sortHighScores() {
 }
 
 function displayHighScores() {
+    rankingList.innerHTML = ""
+    topNamesList.innerHTML = "";
+    topScoresList.innerHTML = "";
     sortHighScores();
     highScores.forEach(displayEachScore)
 }
 
 function displayEachScore(item, index) {
+    var rank = document.createElement("p");
     var scoreName = document.createElement("p");
     var scoreNumber = document.createElement("p");
-    var rank = document.createElement("p");
+    
+    rank.textContent = (index + 1) + ".";
     scoreName.textContent = item.username 
     scoreNumber.textContent = item.highScore;
-    rank.textContent = (index + 1) + ".";
-    topNamesList.appendChild(scoreName);
-    topScoresList.appendChild(scoreNumber);
+    
     rankingList.appendChild(rank);
+    topNamesList.appendChild(scoreName);
+    topScoresList.appendChild(scoreNumber); 
 }
 
 function displayGameOver() {
@@ -143,8 +149,6 @@ if (highScores != null) {
     highScores = loadDefaultScores();
 }
 
-currentScoreDisplay.innerHTML = currentScore;
-
 highScoreButton.addEventListener("click", newHighScore);
 
 startButton.addEventListener("click", function() {
@@ -154,7 +158,7 @@ startButton.addEventListener("click", function() {
     // Sets/Resets starting game variables
     questions = loadQuestions();
     timerInt = 1;
-    currentScore = 0;
+    currentScore = -6;
 
     // Displays score
     currentScoreDisplay.innerHTML = currentScore;
@@ -179,8 +183,6 @@ startButton.addEventListener("click", function() {
             questionDisplay.innerHTML = "";
 
             // Shows start elements
-            // startButton.style.display = "block";
-            // gameOver.style.display = "block";
             timerSpan.style.visibility = "hidden";
 
             // Clears game timer and question interval
@@ -188,11 +190,14 @@ startButton.addEventListener("click", function() {
             clearTimeout(questionTimeout);
 
             // Stores high score
-            if (currentScore >= highScores[9].highScore) {
+            if (currentScore <= highScores[9].highScore) {
                 highScoreDisplay.style.display = "block";
                 displayHighScores();
+                form.style.visibility = "hidden";
+                highScoreTimeout = setInterval(displayGameOver, 5000)
             } else {
-                displayGameOver();
+                highScoreDisplay.style.display = "block";
+                displayHighScores();
             }
         }
     }, 1000);
