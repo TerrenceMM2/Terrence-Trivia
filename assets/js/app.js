@@ -26,13 +26,14 @@ var questions = loadQuestions();
 
 // Randomizes questions and removes from array to prevent duplicate question
 function randomQuestion(arr) {
-    var randQuestion = arr[Math.floor(Math.random() * arr.length)];
-    questions.splice(randQuestion, 1)
+    var index = Math.floor(Math.random() * arr.length)
+    var randQuestion = arr[index];
+    // Removes question from array
+    questions.splice(index, 1)
     return randQuestion;
 };
 
 function displayQuestion() {
-
     // Clears questions timer and reset display
     clearTimeout();
     questionDisplay.innerHTML = "";

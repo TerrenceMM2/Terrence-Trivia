@@ -19,7 +19,7 @@ const loadQuestions = () => {
                 "New York",
                 "Illinois"
             ],
-            correctAnswer: "Tennessee"
+            correctAnswer: "Florida"
         },
         {
             question: "What is my favorite cuisine?",
