@@ -30,13 +30,14 @@
             <section id="high-score">
 
                 <form>
-                    <label for="username">Name:</label>
-                    <input type="text" name="username" id="username">
+                    <label for="username">Please enter your initials:</label>
+                    <input type="text" name="username" id="username" maxlength="3" pattern="[A-Za-z]{3}">
                     <button type="submit" id="hs-button">Submit</button>
                 </form>
                 
                 <h3>Top 10</h3>
                 <div id="score-list">
+                    <div id="ranking"></div>
                     <div id="top-names"></div>
                     <div id="top-scores"></div>
                 </div>
@@ -58,7 +59,8 @@
     <footer>
         Built by <a href="https://www.linkedin.com/in/terrencemahnken/" target="_blank">Terrence Mahnken</a> | &copy; 2020
     </footer>
-    
+
+    <script src="assets/js/defaultScores.js"></script>
     <script src="assets/js/questions.js"></script>
     <script src="assets/js/app.js"></script>
 </body>

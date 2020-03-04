@@ -10,56 +10,15 @@ var timerDisplay = document.getElementById("timer-display");
 var startButton = document.getElementById("start-button");
 var highScoreButton = document.getElementById("hs-button");
 var usernameInput = document.getElementById("username");
+var rankingList = document.getElementById("ranking");
 var topNamesList = document.getElementById("top-names");
 var topScoresList = document.getElementById("top-scores");
 
 var timerInt;
 var timer;
 var questionTimeout;
-// var highScores = localStorage.getItem("high-scores");
-
-var highScores = [
-    {
-        username: "Terrence",
-        highScore: 10
-    },
-    {
-        username: "Helene",
-        highScore: 5
-    },
-    {
-        username: "Alfie",
-        highScore: 25
-    },
-    {
-        username: "Hunter",
-        highScore: 13
-    },
-    {
-        username: "Kody",
-        highScore: 2
-    },
-    {
-        username: "Ev",
-        highScore: 15
-    },
-    {
-        username: "Kent",
-        highScore: 40
-    },
-    {
-        username: "Brittany",
-        highScore: 32
-    },
-    {
-        username: "Pete",
-        highScore: 18
-    },
-    {
-        username: "Alec",
-        highScore: 50
-    }
-]
+var highScoreTimeout;
+var highScores = JSON.parse(localStorage.getItem("high-scores"));
 var currentScore = 0;
 var correctAnswer = "";
 var questions = loadQuestions();
@@ -127,7 +86,7 @@ function selectedAnswer(event) {
 
 function newHighScore(event) {
     event.preventDefault();
-    var newUser = usernameInput.value;
+    var newUser = usernameInput.value.toUpperCase();
     var newUserObj = {
         username: newUser,
         highScore: currentScore
@@ -137,16 +96,18 @@ function newHighScore(event) {
     sortHighScores();
     topNamesList.innerHTML = "";
     topScoresList.innerHTML = "";
+    rankingList.innerHTML = "";
     displayHighScores();
 
-    console.log(highScores)
-    // localStorage.setItem("high-scores", highScores);
+    localStorage.setItem("high-scores", JSON.stringify(highScores));
     
     usernameInput.value = "";
+
+    highScoreTimeout = setInterval(displayGameOver, 5000)
 }
 
 function sortHighScores() {
-    highScores.sort((a, b) => (a.highScore < b.highScore) ? 1 : -1);
+    highScores.sort((a, b) => (a.highScore <= b.highScore) ? 1 : -1);
     if (highScores.length === 11) {
         highScores.pop();
     }
@@ -154,35 +115,45 @@ function sortHighScores() {
 
 function displayHighScores() {
     sortHighScores();
-    highScores.forEach(score => {
-        var scoreName = document.createElement("p");
-        var scoreNumber = document.createElement("p");
-        scoreName.textContent = score.username 
-        scoreNumber.textContent = score.highScore;
-        topNamesList.appendChild(scoreName);
-        topScoresList.appendChild(scoreNumber);
-    })
+    highScores.forEach(displayEachScore)
+}
+
+function displayEachScore(item, index) {
+    var scoreName = document.createElement("p");
+    var scoreNumber = document.createElement("p");
+    var rank = document.createElement("p");
+    scoreName.textContent = item.username 
+    scoreNumber.textContent = item.highScore;
+    rank.textContent = (index + 1) + ".";
+    topNamesList.appendChild(scoreName);
+    topScoresList.appendChild(scoreNumber);
+    rankingList.appendChild(rank);
 }
 
 function displayGameOver() {
+    highScoreDisplay.style.display = "none";
     gameOver.style.display = "block";
+    startButton.style.display = "block";
 }
 
-
 // Sets/Displays high score
-if (highScores === null ) {
-    highScores = [];
-};
+if (highScores != null) {
+    highScores = JSON.parse(localStorage.getItem("high-scores"));
+} else {
+    highScores = loadDefaultScores();
+}
 
 currentScoreDisplay.innerHTML = currentScore;
 
 highScoreButton.addEventListener("click", newHighScore);
 
 startButton.addEventListener("click", function() {
+
+    clearTimeout(highScoreTimeout);
     
     // Sets/Resets starting game variables
     questions = loadQuestions();
-    timerInt = 5;
+    timerInt = 1;
     currentScore = 0;
 
     // Displays score
@@ -217,8 +188,12 @@ startButton.addEventListener("click", function() {
             clearTimeout(questionTimeout);
 
             // Stores high score
-            highScoreDisplay.style.display = "block";
-            displayHighScores();
+            if (currentScore >= highScores[9].highScore) {
+                highScoreDisplay.style.display = "block";
+                displayHighScores();
+            } else {
+                displayGameOver();
+            }
         }
     }, 1000);
 });
