@@ -35,19 +35,55 @@ main {
     align-items: center;
     justify-content: center;
     width: 90%;
+    height: 80vh;
     margin: auto;
 }
 
 #game-over {
     display: none;
+    color: black;
+}
+
+#score-list {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#top-names, #top-scores {
+    text-align: left;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+#high-score {
+    display: none;
+    color: black;
+}
+
+#username {
+    border: none;
+    line-height: 1.4em;
+    padding: .5em;
+    border-radius: 5px;
+}
+
+#hs-button {
+    background: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 #start-button {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     padding: 1rem 6rem;
-    margin-top: 10rem;
     font-size: 2em;
+    color: black;
 }
 
 #start-button:hover {
@@ -56,6 +92,9 @@ main {
 
 #display {
     width: 90%;
+    color: black;
+    display: flex;
+    flex-direction: column;
 }
 
 #answers {
@@ -90,10 +129,8 @@ main {
     color: white;
 }
 
-#timer-display {
-    display: none;
-    margin: 1em;
-    font-size: 1.25rem
+#timer-span {
+    visibility: hidden;
 }
 
 footer {
@@ -113,9 +150,5 @@ a {
 @media only screen and (min-width: 768px) {
     .answer {
         width: 40%;
-    }
-
-    main {
-        margin-top: 11em;
     }
 }

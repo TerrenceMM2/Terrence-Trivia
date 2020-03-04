@@ -12,33 +12,47 @@
 <body>
     <div class="wrapper">
 
-    <header>
-        <h1>Terrence Trivia</h1>
-    </header>
+        <header>
+            <h1>Terrence Trivia</h1>
+        </header>
 
-    <section>
-        <div>High Score: <span id="high-score"></span></div>
-        
-        <div>Current Score: <span id="current-score"></span></div>
-    </section>
-
-    <main id="main">
-        <h2 id="game-over">GAME OVER</h2>
-
-        <div id="start-button">Start Quiz</div>
-
-        <div id="display">
-            <div id="question"></div>
+        <section>        
+            <div>Current Score: <span id="current-score"></span></div>
             
-            <div id="answers"></div>
+            <div id="timer-display">Timer: <span id="timer"></span></div>
+        </section>
 
-            <div id="correct-answer"></div>
-        </div>
-    </main>
+        <main id="main">
+            <section id="game-over">
+                <h2>GAME OVER</h2>
+            </section>
+            
+            <section id="high-score">
 
-    <div id="timer-display">Timer: <span id="timer"></span></div>
+                <form>
+                    <label for="username">Name:</label>
+                    <input type="text" name="username" id="username">
+                    <button type="submit" id="hs-button">Submit</button>
+                </form>
+                
+                <h3>Top 10</h3>
+                <div id="score-list">
+                    <div id="top-names"></div>
+                    <div id="top-scores"></div>
+                </div>
+            </section>
 
-    <div class="push"></div>
+            <section id="start-button">Start Quiz</section>
+
+            <section id="display">
+                <div id="question"></div>
+                
+                <div id="answers"></div>
+            </section>
+        </main>
+
+        <div class="push"></div>
+
     </div>
 
     <footer>

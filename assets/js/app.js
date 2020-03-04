@@ -8,11 +8,58 @@ var currentScoreDisplay = document.getElementById("current-score");
 var timerSpan = document.getElementById("timer");
 var timerDisplay = document.getElementById("timer-display");
 var startButton = document.getElementById("start-button");
+var highScoreButton = document.getElementById("hs-button");
+var usernameInput = document.getElementById("username");
+var topNamesList = document.getElementById("top-names");
+var topScoresList = document.getElementById("top-scores");
 
 var timerInt;
 var timer;
 var questionTimeout;
-var highScore = localStorage.getItem("high-score");
+// var highScores = localStorage.getItem("high-scores");
+
+var highScores = [
+    {
+        username: "Terrence",
+        highScore: 10
+    },
+    {
+        username: "Helene",
+        highScore: 5
+    },
+    {
+        username: "Alfie",
+        highScore: 25
+    },
+    {
+        username: "Hunter",
+        highScore: 13
+    },
+    {
+        username: "Kody",
+        highScore: 2
+    },
+    {
+        username: "Ev",
+        highScore: 15
+    },
+    {
+        username: "Kent",
+        highScore: 40
+    },
+    {
+        username: "Brittany",
+        highScore: 32
+    },
+    {
+        username: "Pete",
+        highScore: 18
+    },
+    {
+        username: "Alec",
+        highScore: 50
+    }
+]
 var currentScore = 0;
 var correctAnswer = "";
 var questions = loadQuestions();
@@ -67,40 +114,83 @@ function selectedAnswer(event) {
     // Sets 2 sec timer to show next question
     if (event.target.dataset.answer === correctAnswer) {
         event.target.setAttribute("id", "correct");
-        currentScore = currentScore + 5;
+        currentScore += 5;
         currentScoreDisplay.innerHTML = currentScore;
         questionTimeout = setTimeout(displayQuestion, 2000);
     } else {
         event.target.setAttribute("id", "incorrect");
-        currentScore = currentScore - 3;
+        currentScore -= 3;
         currentScoreDisplay.innerHTML = currentScore;
         questionTimeout = setTimeout(displayQuestion, 2000);
     }
 };
 
+function newHighScore(event) {
+    event.preventDefault();
+    var newUser = usernameInput.value;
+    var newUserObj = {
+        username: newUser,
+        highScore: currentScore
+    }
+
+    highScores.push(newUserObj);
+    sortHighScores();
+    topNamesList.innerHTML = "";
+    topScoresList.innerHTML = "";
+    displayHighScores();
+
+    console.log(highScores)
+    // localStorage.setItem("high-scores", highScores);
+    
+    usernameInput.value = "";
+}
+
+function sortHighScores() {
+    highScores.sort((a, b) => (a.highScore < b.highScore) ? 1 : -1);
+    if (highScores.length === 11) {
+        highScores.pop();
+    }
+}
+
+function displayHighScores() {
+    sortHighScores();
+    highScores.forEach(score => {
+        var scoreName = document.createElement("p");
+        var scoreNumber = document.createElement("p");
+        scoreName.textContent = score.username 
+        scoreNumber.textContent = score.highScore;
+        topNamesList.appendChild(scoreName);
+        topScoresList.appendChild(scoreNumber);
+    })
+}
+
+function displayGameOver() {
+    gameOver.style.display = "block";
+}
+
 
 // Sets/Displays high score
-if (highScore === null ) {
-    highScore = 0;
+if (highScores === null ) {
+    highScores = [];
 };
 
-highScoreDisplay.innerHTML = highScore;
 currentScoreDisplay.innerHTML = currentScore;
+
+highScoreButton.addEventListener("click", newHighScore);
 
 startButton.addEventListener("click", function() {
     
     // Sets/Resets starting game variables
     questions = loadQuestions();
-    timerInt = 60;
+    timerInt = 5;
     currentScore = 0;
 
     // Displays score
     currentScoreDisplay.innerHTML = currentScore;
-    highScoreDisplay.innerHTML = highScore;
-    
+
     // Sets questions and displays/hide other elements
     displayQuestion();
-    timerDisplay.style.display = "block";
+    timerSpan.style.visibility = "initial";
     timerSpan.innerHTML = timerInt;
     startButton.style.display = "none";
     gameOver.style.display = "none";
@@ -118,20 +208,17 @@ startButton.addEventListener("click", function() {
             questionDisplay.innerHTML = "";
 
             // Shows start elements
-            startButton.style.display = "block";
-            gameOver.style.display = "block";
-            timerDisplay.style.display = "none";
+            // startButton.style.display = "block";
+            // gameOver.style.display = "block";
+            timerSpan.style.visibility = "hidden";
 
             // Clears game timer and question interval
             clearInterval(timer);
             clearTimeout(questionTimeout);
 
             // Stores high score
-            if (currentScore > highScore) {
-                highScore = currentScore;
-                highScoreDisplay.innerHTML = highScore;
-                localStorage.setItem("high-score", currentScore);
-            }
+            highScoreDisplay.style.display = "block";
+            displayHighScores();
         }
     }, 1000);
 });
