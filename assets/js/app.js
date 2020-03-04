@@ -87,34 +87,44 @@ function selectedAnswer(event) {
 
 function newHighScore(event) {
     event.preventDefault();
+
+    // Creates new user object
     var newUser = usernameInput.value.toUpperCase();
     var newUserObj = {
         username: newUser,
         highScore: currentScore
     }
 
+    // Push new objects and sorts new array
     highScores.push(newUserObj);
     sortHighScores();
+
+    // Resets and displays high score view
     topNamesList.innerHTML = "";
     topScoresList.innerHTML = "";
     rankingList.innerHTML = "";
     displayHighScores();
 
+    // Stores high scores in local storage
     localStorage.setItem("high-scores", JSON.stringify(highScores));
     
+    // Clears input
     usernameInput.value = "";
 
+    // Automatically displays "Game Over" and start button after submission
     highScoreTimeout = setInterval(displayGameOver, 5000)
 }
 
 function sortHighScores() {
     highScores.sort((a, b) => (a.highScore <= b.highScore) ? 1 : -1);
+    // Keeps top 10 scores
     if (highScores.length === 11) {
         highScores.pop();
     }
 }
 
 function displayHighScores() {
+    // Resets, sorts scores, and displays each score
     rankingList.innerHTML = ""
     topNamesList.innerHTML = "";
     topScoresList.innerHTML = "";
@@ -123,6 +133,7 @@ function displayHighScores() {
 }
 
 function displayEachScore(item, index) {
+    // Dynamically creates and displays data
     var rank = document.createElement("p");
     var scoreName = document.createElement("p");
     var scoreNumber = document.createElement("p");
@@ -157,8 +168,8 @@ startButton.addEventListener("click", function() {
     
     // Sets/Resets starting game variables
     questions = loadQuestions();
-    timerInt = 1;
-    currentScore = -6;
+    timerInt = 60;
+    currentScore = 0;
 
     // Displays score
     currentScoreDisplay.innerHTML = currentScore;
