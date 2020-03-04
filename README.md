@@ -8,8 +8,8 @@ This single, JavaScript quiz game tests your knowledge of ... me 😀.
 1. Click the "Start Quiz" button to begin the game.  
 2. You'll have 60 seconds to answer as many questions as possible.  
 3. For each correct answer, 5 points are awarded. 3 points is deducted for each incorrect answer.
-4. If your score surpasses the displayed high score, the new high score will be stored locally.
-5. Click the "Start Quiz" button to begin the game again.
+4. If your score is in the Top 10 after 60 seconds, enter your initials to be saved to the leaderboard.
+5. You'll be automatically redirected to play again.
 
 ## Screenshot
 ![Terrence Trivia Screenshot](../media/screenshot.png?raw=true)
