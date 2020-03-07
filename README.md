@@ -17,6 +17,8 @@ This single, JavaScript quiz game tests your knowledge of ... me 😀.
 ### Built With
 1. HTML/CSS
 2. JavaScript
+3. [Bootstrap](https://getbootstrap.com/)
+4. [Google Fonts](http://fonts.google.com/)
 
 ### Author
 * **Terrence Mahnken** - [LinkedIn](https://www.linkedin.com/in/terrencemahnken/) | [Twitter](https://twitter.com/TerrenceMahnken) | [Personal Portfolio](https://terrence.codes)
